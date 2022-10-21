@@ -26,10 +26,10 @@ public class UserRestController {
 	 */
 	@RequestMapping("/is_duplicated_id")
 	public Map<String, Object> isDuplicatedId(
-			@RequestParam("loginID") String loginID) {
+			@RequestParam("loginId") String loginId) {
 		
 		Map<String, Object> result = new HashMap<>();
-		boolean isDuplicated = userBO.existLoginID(loginID);
+		boolean isDuplicated = userBO.existLoginId(loginId);
 		
 		if (isDuplicated) {
 			result.put("result", true);
@@ -47,14 +47,13 @@ public class UserRestController {
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password,
 			@RequestParam("name") String name,
-			@RequestParam("email") String email,
-			@RequestParam("profileImagePath") String profileImagePath) {
+			@RequestParam("email") String email) {
 	
 		// 암호화 (해싱) md5
 		String encryptPassword = EncryptUtils.md5(password);
 		
 		// db insert
-		userBO.addUser(loginId, encryptPassword, name, email, profileImagePath);
+		userBO.addUser(loginId, encryptPassword, name, email);
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 100);

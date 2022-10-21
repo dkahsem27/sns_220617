@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDAO {
 
-	public boolean existLoginID(String loginID);
+	public boolean existLoginId(String loginId);
 	
 	public void insertUser(
 			@Param("loginId") String loginId, 

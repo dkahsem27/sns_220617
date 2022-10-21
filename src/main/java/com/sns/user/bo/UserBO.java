@@ -11,11 +11,11 @@ public class UserBO {
 	@Autowired
 	private UserDAO userDAO;
 	
-	public boolean existLoginID(String loginID) {
-		return userDAO.existLoginID(loginID);
+	public boolean existLoginId(String loginId) {
+		return userDAO.existLoginId(loginId);
 	}
 	
-	public void addUser(String loginId, String password, String name, String email, String profileImagePath) {
-		userDAO.insertUser(loginId, password, name, email, profileImagePath);
+	public void addUser(String loginId, String password, String name, String email) {
+		userDAO.insertUser(loginId, password, name, email, null);
 	}
 }
