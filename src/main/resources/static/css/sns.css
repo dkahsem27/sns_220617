@@ -5,17 +5,27 @@ a {text-decoration: none !important; color: #000;}
 a:hover {color: #000;}
 button {border: none; padding: 0; cursor: pointer; background: none;}
 button:focus {border: none; outline: none;}
-textarea {border: none; outline: none;}
+textarea {border: none; outline: none; font-size: 14px;}
+input[type=text] {border: none; outline: none; font-size: 14px;}
+
+/* material icons */
+.material-icons.md-18 {font-size: 18px;}
+.material-icons.md-24 {font-size: 24px;}
+.material-icons.md-36 {font-size: 36px;}
+.material-icons.md-48 {font-size: 48px;}
+
+/* colors */
+.c-red {color: firebrick;}
+.c-gray {color: gray;}
 
 /* common */
-.btn-more {display: flex; align-items: center;}
-.btn-like {display: flex; align-items: center;}
-.btn-upload {color: lightseagreen; font-size: 15px;}
-.btn-img-upload {height: 24px;}
+.btn-upload {color: lightseagreen; font-size: 14px;}
+.btn-img-upload {max-height: 24px;}
+.btn-clear {max-height: 18px;}
 
 /* header */
 #header {height: 80px; padding: 0 20px; background: #eee;}
-#header h1 {margin-bottom: 0;}
+#header h1 {margin-bottom: 0; font-size: 35px;}
 #header .util-box .greeting {color: #666;}
 #header .util-box .greeting .user-name {font-weight: 500; color: #000;}
 #header .util-box .btn-sign-out {text-decoration: underline;}
@@ -29,7 +39,7 @@ textarea {border: none; outline: none;}
 
 .add-post-area {margin: 0 auto; padding: 0 !important;}
 .add-post-area .add-post-inner {border: 1px solid #ddd;}
-.add-post-area textarea {width: 100%; height: 100px;}
+.add-post-area textarea {width: 100%; height: 90px;}
 .add-post-area .util-box {border-top: 1px solid #eee;}
 .add-post-area .util-box input[type=file] {font-size: 14px;}
 
@@ -41,15 +51,17 @@ textarea {border: none; outline: none;}
 .post-list-area .image-box {width: 100%;}
 .post-list-area .image-box img {min-width: 100%; max-width: 100%; object-fit: cover;}
 
-.post-list-area .like-box .like-count {font-size: 14px; color: #666;}
+.post-list-area .like-box {max-height: 24px;}
+.post-list-area .like-box .like-count {line-height: 24px; font-size: 14px; font-weight: 500; color: #666;}
 
 .post-list-area .content-box {font-size: 14px;}
-.post-list-area .content-box .content {width: 85%;}
 .post-list-area .content-box .post-content .user-name {width: 15%;}
-.post-list-area .comment-box {font-size: 14px;}
+.post-list-area .content-box .content {width: 85%;}
+
+.post-list-area .comment-box {font-size: 14px; border-top: 1px solid #eee;}
+.post-list-area .comment-box-title {font-size: 13px; color: #888;}
+.post-list-area .comment-box .comment-content .user-name {width: 15%; font-weight: 500;}
 .post-list-area .comment-box .content {width: 85%;}
-.post-list-area .comment-box .comment-content .user-name {width: 15%;}
 
 .post-list-area .comment-input-box {width: 100%; border-top: 1px solid #ddd;}
-.post-list-area .comment-input-box input[type=text] {border: none;}
 .post-list-area .comment-input-box .btn-upload {min-width: 10%;}
