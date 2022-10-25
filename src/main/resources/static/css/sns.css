@@ -6,7 +6,7 @@ a:hover {color: #000;}
 button {border: none; padding: 0; cursor: pointer; background: none;}
 button:focus {border: none; outline: none;}
 textarea {border: none; outline: none; font-size: 14px;}
-input[type=text] {border: none; outline: none; font-size: 14px;}
+.timeline-wrap input[type=text] {border: none; outline: none; font-size: 14px;}
 
 /* material icons */
 .material-icons.md-18 {font-size: 18px;}
@@ -24,14 +24,15 @@ input[type=text] {border: none; outline: none; font-size: 14px;}
 .btn-clear {max-height: 18px;}
 
 /* header */
-#header {height: 80px; padding: 0 20px; background: #eee;}
+#header {z-index: 100; width: 100%; position: fixed; top: 0; left: 0; height: 80px; padding: 0 20px; background: #fff; border-bottom: 1px solid #eee;}
 #header h1 {margin-bottom: 0; font-size: 35px;}
 #header .util-box .greeting {color: #666;}
 #header .util-box .greeting .user-name {font-weight: 500; color: #000;}
-#header .util-box .btn-sign-out {text-decoration: underline;}
+#header .util-box .btn-sign-out {font-size: 14px;}
+#header .util-box .btn-sign-out:hover {text-decoration: underline !important;}
 
 /* contents */
-#contents {max-width: 1100px; margin: 0 auto; padding: 60px 0;}
+#contents {max-width: 1100px; margin: 0 auto; padding: 140px 0 60px;}
 .form-outer {margin: 0 auto;}
 .form-outer button, .form-outer a {display: block; width: 100%;}
 .form-box .noti {font-size: 12px; margin-left: 120px;}

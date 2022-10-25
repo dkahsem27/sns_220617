@@ -6,7 +6,7 @@
 	    <div class="form-group mb-2 d-flex align-items-center">
 	      <label for="loginId">아이디</label>
 	      <input type="text" name="loginId" id="loginId" class="form-control">
-	      <button type="button" id="loginIdCheckBtn" class="btn btn-dark col-3 ml-2">중복확인</button>
+	      <button type="button" id="loginIdCheckBtn" class="btn btn-outline-secondary col-3 ml-2">중복확인</button>
 	    </div>
 	    <div class="noti-box mb-3">
 	      <div id="idCheckLength" class="noti text-danger d-none">아이디를 4자 이상 입력하세요.</div>
@@ -32,7 +32,7 @@
 	  </div>
 	</div>
 	<div class="btn-box d-flex justify-content-center mt-5">
-	  <button type="submit" class="btn btn-primary btn-block col-5">회원가입</button>
+	  <button type="submit" class="btn btn-dark btn-block col-5">회원가입</button>
 	</div>
 </form>
 

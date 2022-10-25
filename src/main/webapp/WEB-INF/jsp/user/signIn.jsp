@@ -11,8 +11,8 @@
 	    <input type="text" name="password" id="password" class="form-control">
 	  </div>
 	  <div class="btn-box mt-5">
-	    <button type="submit" class="btn btn-primary">로그인</button>
-	    <a href="/user/sign_up_view" class="btn btn-secondary mt-2">회원가입</a>
+	    <button type="submit" class="btn btn-dark">로그인</button>
+	    <a href="/user/sign_up_view" class="btn btn-outline-secondary mt-2">회원가입</a>
 	  </div>
 	</div>
 </form>
