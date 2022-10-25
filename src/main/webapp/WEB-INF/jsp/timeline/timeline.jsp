@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <section class="add-post-area col-6">
 	<div class="add-post-inner py-2">
-		<textarea class="px-2"></textarea>
+		<textarea id="content" class="px-2"></textarea>
 		<div class="util-box pt-2 px-2 d-flex justify-content-between align-items-center">
-		    <%-- <input type="file"> --%>
-		    <button type="button" class="btn-img-upload"><span class="material-icons-outlined c-gray">add_photo_alternate</span></button>
-		    <button type="button" class="btn-upload">게시</button>
+			<div class="file-upload d-flex align-items-center">
+				<input type="file" id="file" class="d-none" accept=".gif, .jpg, .jpeg, .png">
+			    <button type="button" id="fileUploadBtn" class="btn-img-upload"><span class="material-icons-outlined c-gray">add_photo_alternate</span></button>
+			    <div id="fileName" class="file-name ml-2"></div>
+			</div>
+		    <button type="button" id="postCreateBtn" class="btn-upload">게시</button>
 	  	</div>
   	</div>
 </section>
@@ -57,3 +60,94 @@
   		</div>
   	</div>
 </section>
+
+<script>
+$(document).ready(function() {
+	// 파일 업로드 이미지(a, button) 클릭 => 파일 선택 창이 떠야함
+	$('#fileUploadBtn').on('click', function(e) {
+		e.preventDefault(); // a태그의 기본 동작 멈춤(화면 최상단으로 올라가는 것 방지)
+		$('#file').click(); // input file을 클릭한 것과 같은 효과
+	});
+	
+	// 사용자가 파일 업로드를 했을 때, 유효성 확인 및 업로드 된 파일 이름 노출
+	$('#file').on('change', function(e) {
+		//alert('체인지');
+		
+		let fileName = e.target.files[0].name; // ex) tea-ga6ab33572_640.jpg
+		//alert(fileName);
+		let ext = fileName.split('.').pop().toLowerCase();
+		
+		// 확장자 유효성 확인
+		if (fileName.split('.').length < 2 || 
+				(ext != 'gif' 
+						&& ext != 'jpg' 
+						&& ext != 'jpeg' 
+						&& ext != 'png')) {
+			alert("이미지 파일만 업로드 할 수 있습니다.");
+			$(this).val(''); // 파일 태그의 실제 파일 제거
+			$('#fileName').text(''); // 파일 이름 비우기
+			return;
+		}
+		
+		// 상자에 업로드된 이름 노출
+		$('#fileName').text(fileName);
+	});
+	
+	// 게시 버튼 클릭
+	$('#postCreateBtn').on('click', function() {
+		// validation
+		let content = $('#content').val();
+		if (content == '') {
+			alert('내용을 입력하세요');
+			return;
+		}
+		
+		let file = $('#file').val();
+		if (file == '') {
+			alert('파일을 선택하세요');
+			return;
+		}
+		// 파일이 업로드 된 경우 확장자 체크
+		if (file != '') {
+			let ext = file.split('.').pop().toLowerCase();
+			if ($.inArray(ext, ['gif', 'jpg', 'jpeg', 'png']) == -1) {
+				alert('gif, jpg, jpeg, png 파일만 업로드할 수 있습니다.');
+				$('#file').val('');
+				return;
+			}
+		}
+		
+		// 폼태그 만들기 (RequestParam 구성)
+		let formData = new FormData();
+		formData.append("content", content);
+		formData.append("file", $('#file')[0].files[0]);
+		
+		// ajax
+		$.ajax({
+			// request
+			type: "post"
+			, url: "/post/create"
+			, data: formData
+			// 파일 업로드를 위한 필수 설정 3가지
+			, enctype: "multipart/form-data"
+			, processData: false
+			, contentType: false
+			
+			// response
+			, success: function(data) {
+				if (data.code == 100) {
+					// 성공
+					alert("포스트가 저장되었습니다");
+					location.href="/timeline/timeline_view";
+				} else {
+					// 실패
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("포스트 저장에 실패했습니다");
+			}
+		});
+	});
+});
+</script>
