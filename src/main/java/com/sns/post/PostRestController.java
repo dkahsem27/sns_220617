@@ -30,11 +30,17 @@ public class PostRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
 		
+		Map<String, Object> result = new HashMap<>();
+		
+		// 로그인이 풀렸을 때
+		if (userId == null) {
+			result.put("code", 300);
+			result.put("errorMessage", "로그인 상태가 아닙니다. 다시 로그인 해 주세요.");
+		}
 		
 		// db insert
 		int row = postBO.addPost(userId, userLoginId, content, file);
 		
-		Map<String, Object> result = new HashMap<>();
 		if (row > 0) {
 			result.put("code", 100);
 			result.put("result", "success");
