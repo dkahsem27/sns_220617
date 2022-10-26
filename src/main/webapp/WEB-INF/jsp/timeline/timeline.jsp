@@ -48,17 +48,12 @@
 		  			<div class="content">댓글 내용입니다 댓글댓글 댓글입니다요</div>
 		  			<button type="button" class="btn-clear ml-2"><span class="material-icons md-18 c-gray">clear</span></button>
 		  		</div>
-		  		<div class="comment-content d-flex py-1">
-		  			<div class="user-name">user22</div>
-		  			<div class="content">댓글 내용입니다 긴댓글 글자가 길어질 때 ??댓글 내용입니다 댓글댓글 댓글입니다요</div>
-		  			<button type="button" class="btn-clear ml-2"><span class="material-icons md-18 c-gray">clear</span></button>
-		  		</div>
 		  	</div>
 		  	<%-- 댓글쓰기 --%>
 		  	<div class="comment-input-box mt-4">
 		  		<div class="comment-input py-2 pl-2 d-flex justify-content-between align-items-center">
-		  			<input type="text" class="w-100">
-		  			<button type="button" class="btn-upload">게시</button>
+		  			<input type="text" class="w-100" placeholder="댓글 달기">
+		  			<button type="button" class="btn-comment btn-upload" data-post-id="${post.id}">게시</button>
 		  		</div>
 		  	</div>
 		</section>
@@ -151,6 +146,49 @@ $(document).ready(function() {
 			}
 			, error: function(e) {
 				alert("포스트 저장에 실패했습니다");
+			}
+		});
+	});
+	
+	// 댓글 게시버튼 클릭
+	$('.btn-comment').on('click', function() {
+		//alert('댓글 게시 클릭');
+		let postId = $(this).data('post-id');
+		
+		// 지금 클릭된 게시 버튼의 형제인 input 태그를 가져온다. (siblings)
+		let comment = $(this).siblings('input').val().trim();
+		
+		// validation
+		if (comment == '') {
+			alert('댓글을 입력하세요');
+			return;
+		}
+		
+		/* let formData = new FormData();
+		formData.append("postId", postId);
+		formData.append("content", comment); */
+		
+		// ajax
+		$.ajax({
+			// request
+			type: "post"
+			, url: "/comment/create"
+			, data: {"postId":postId, "content":comment}
+			
+			// response
+			, success: function(data) {
+				if (data.code == 100) { // 성공
+					alert("댓글이 저장되었습니다");
+					location.reload();
+				} else if (data.code == 300) { // 비로그인시
+					alert(data.errorMessage);
+					location.href = "/user/sign_in_view";
+				} else { // 실패
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("댓글 저장에 실패했습니다");
 			}
 		});
 	});

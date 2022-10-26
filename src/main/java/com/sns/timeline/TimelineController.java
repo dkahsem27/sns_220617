@@ -29,6 +29,7 @@ public class TimelineController {
 		}
 		
 		List<Post> postList = postBO.getPostList();
+		//List<CardView> 
 		model.addAttribute("postList", postList);
 		
 		model.addAttribute("viewName", "timeline/timeline");
