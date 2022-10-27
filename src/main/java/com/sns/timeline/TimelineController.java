@@ -9,15 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sns.post.bo.PostBO;
-import com.sns.post.model.Post;
+import com.sns.comment.bo.CommentBO;
+import com.sns.comment.model.CommentView;
+import com.sns.timeline.bo.TimelineBO;
 
 @RequestMapping("/timeline")
 @Controller
 public class TimelineController {
 
+	//@Autowired
+	//private PostBO postBO;
+	
 	@Autowired
-	private PostBO postBO;
+	private TimelineBO timelineBO;
+	
+	@Autowired
+	private CommentBO commentBO;
 	
 	@RequestMapping("/timeline_view")
 	public String timelineView(HttpSession session, Model model) {
@@ -28,9 +35,10 @@ public class TimelineController {
 			return "redirect:/user/sign_in_view";
 		}
 		
-		List<Post> postList = postBO.getPostList();
-		//List<CardView> 
-		model.addAttribute("postList", postList);
+		//List<CardView> postList = postBO.getPostList();
+		// model.addAttribute("postList", postList);
+		List<CardView> cardViewList = timelineBO.generateCardList(userId);
+		model.addAttribute("cardList", cardViewList);
 		
 		model.addAttribute("viewName", "timeline/timeline");
 		return "template/layout";
