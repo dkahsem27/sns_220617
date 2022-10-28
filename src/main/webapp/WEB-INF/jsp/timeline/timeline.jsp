@@ -33,7 +33,7 @@
 			</div>
 			<%-- 좋아요 --%>
 			<div class="like-box d-flex mt-3 px-2">
-				<button type="button" id="likeBtn" data-post-id="${card.post.id}">
+				<button type="button" class="btn-like" data-post-id="${card.post.id}">
 					<c:if test="${card.filledLike eq false}">
 				    	<span class="like-empty material-icons">favorite_border</span>
 				    </c:if>
@@ -208,7 +208,7 @@ $(document).ready(function() {
 	});
 	
 	// 좋아요 버튼 클릭
-	$('#likeBtn').on('click', function() {
+	$('.btn-like').on('click', function() {
 		let postId = $(this).data('post-id');
 		
 		// ajax
