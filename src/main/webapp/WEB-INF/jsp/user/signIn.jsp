@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <form id="signInForm" method="post" action="/user/sign_in">
-	<div class="form-outer col-4">
+	<div class="form-outer col-5">
 	  <div class="form-group d-flex align-items-center">
 	    <label for="loginId">아이디</label>
 	    <input type="text" name="loginId" id="loginId" class="form-control">

@@ -26,8 +26,11 @@ textarea {border: none; outline: none; font-size: 14px;}
 /* header */
 #header {z-index: 100; width: 100%; position: fixed; top: 0; left: 0; height: 80px; padding: 0 20px; background: #fff; border-bottom: 1px solid #eee;}
 #header h1 {margin-bottom: 0; font-size: 35px;}
+#header .util-box .user-info > img {min-width: 25px; max-width: 25px; min-height: 25px; border-radius: 50%; object-fit: cover;}
 #header .util-box .greeting {color: #666;}
 #header .util-box .greeting .user-name {font-weight: 500; color: #000;}
+#header .util-box .btn-mypage {font-size: 14px;}
+#header .util-box .btn-mypage:hover {text-decoration: underline !important;}
 #header .util-box .btn-sign-out {font-size: 14px;}
 #header .util-box .btn-sign-out:hover {text-decoration: underline !important;}
 
