@@ -19,6 +19,7 @@
 	<%-- 목록 --%>
 	<c:forEach items="${cardList}" var="card">
 		<section class="post-list-area col-6 mt-4">
+			<%-- 글쓴이, 더보기(삭제) --%>
 			<div class="util-box d-flex justify-content-between align-items-center px-2 py-2">
 			    <div class="user-info d-flex align-items-center">
 			      <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="프로필이미지">
@@ -26,14 +27,23 @@
 			    </div>
 			    <button type="button" class="btn-more"><span class="material-icons c-gray">more_horiz</span></button>
 		  	</div>
+		  	<%-- 포스트 이미지 --%>
 		  	<div class="image-box">
 			    <img src="${card.post.imagePath}" alt="포스트이미지">
 			</div>
+			<%-- 좋아요 --%>
 			<div class="like-box d-flex mt-3 px-2">
-			    <button type="button" class="btn-like-empty"><span class="material-icons">favorite_border</span></button>
-			    <button type="button" class="btn-like"><span class="material-icons c-red">favorite</span></button>
-			    <div class="like-count ml-2">좋아요 n개</div>
+				<button type="button" id="likeBtn" data-post-id="${card.post.id}">
+					<c:if test="${card.filledLike eq false}">
+				    	<span class="like-empty material-icons">favorite_border</span>
+				    </c:if>
+				    <c:if test="${card.filledLike eq true}">
+				    	<span class="like material-icons c-red">favorite</span>
+				    </c:if>
+			    </button>
+			    <div class="like-count ml-2">좋아요 ${card.likeCount}개</div>
 		  	</div>
+		  	<%-- 포스트 내용 --%>
 		  	<div class="content-box mt-5 px-2">
 		  		<div class="post-content d-flex">
 		  			<div class="user-name font-weight-bold">${card.user.loginId}</div>
@@ -193,6 +203,34 @@ $(document).ready(function() {
 			}
 			, error: function(e) {
 				alert("댓글 저장에 실패했습니다");
+			}
+		});
+	});
+	
+	// 좋아요 버튼 클릭
+	$('#likeBtn').on('click', function() {
+		let postId = $(this).data('post-id');
+		
+		// ajax
+		$.ajax({
+			// request
+			type: "get"
+			, url: "/like/" + postId
+			, data: {"postId":postId}
+			
+			// response
+			, success: function(data) {
+				if (data.code == 100) { // 성공
+					location.reload();
+				} else if (data.code == 300) { // 비로그인시
+					alert(data.errorMessage);
+					location.href = "/user/sign_in_view";
+				} else { // 실패
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("실패했습니다");
 			}
 		});
 	});

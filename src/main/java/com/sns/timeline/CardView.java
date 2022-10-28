@@ -17,18 +17,12 @@ public class CardView {
 	private List<CommentView> commentList;
 	
 	// 좋아요 개수
+	private int likeCount;
 	
 	// 로그인 사람이 좋아요를 눌렀는지
 	private boolean filledLike; // 눌렀으면 true 아니면 false
 	
-	public boolean isFilledLike() {
-		return filledLike;
-	}
-
-	public void setFilledLike(boolean filledLike) {
-		this.filledLike = filledLike;
-	}
-
+	// getter, setter
 	public Post getPost() {
 		return post;
 	}
@@ -51,5 +45,21 @@ public class CardView {
 
 	public void setCommentList(List<CommentView> commentList) {
 		this.commentList = commentList;
+	}
+	
+	public boolean isFilledLike() {
+		return filledLike;
+	}
+
+	public void setFilledLike(boolean filledLike) {
+		this.filledLike = filledLike;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 }

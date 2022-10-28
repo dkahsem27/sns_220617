@@ -9,4 +9,14 @@ public interface LikeDAO {
 	public boolean existLike(
 			@Param("postId") int postId, 
 			@Param("userId") int userId);
+	
+	public int selectLikeCountByPostId(int postId);
+	
+	public void insertLike(
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
+	
+	public void deleteLikeByPostIdUserId(
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
 }

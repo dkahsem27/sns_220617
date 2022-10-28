@@ -33,9 +33,18 @@ public class LikeRestController {
 		}
 		
 		// 좋아요 있으면 삭제, 없으면 추가
-		boolean like = likeBO.existLike(postId, postId);
-		if (like) {
-			
+		boolean isLike = likeBO.existLike(postId, userId);
+		
+		if (isLike == true) {
+			result.put("code", 100);
+			result.put("result", "success");
+			likeBO.deleteLikeByPostIdUserId(postId, userId);
+		} else if (isLike == false) {
+			result.put("code", 100);
+			result.put("result", "success");
+			likeBO.addLike(postId, userId);
+		} else {
+			result.put("errorMessage", "서버에러");
 		}
 		
 		return result;

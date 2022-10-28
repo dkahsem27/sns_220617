@@ -12,12 +12,18 @@ public class LikeBO {
 	private LikeDAO likeDAO;
 	
 	public boolean existLike(int postId, int userId) {
-		
-		boolean like = likeDAO.existLike(postId, userId);
-		if (like) {
-			return true;
-		}
-		
-		return false;
+		return likeDAO.existLike(postId, userId);
+	}
+	
+	public int getLikeCountByPostId(int postId) {
+		return likeDAO.selectLikeCountByPostId(postId);
+	}
+	
+	public void addLike(int postId, int userId) {
+		likeDAO.insertLike(postId, userId);
+	}
+	
+	public void deleteLikeByPostIdUserId(int postId, int userId) {
+		likeDAO.deleteLikeByPostIdUserId(postId, userId);
 	}
 }
