@@ -33,19 +33,25 @@ public class LikeRestController {
 		}
 		
 		// 좋아요 있으면 삭제, 없으면 추가
-		boolean isLike = likeBO.existLike(postId, userId);
+		likeBO.likeToggle(postId, userId);
 		
-		if (isLike == true) {
-			result.put("code", 100);
-			result.put("result", "success");
-			likeBO.deleteLikeByPostIdUserId(postId, userId);
-		} else if (isLike == false) {
-			result.put("code", 100);
-			result.put("result", "success");
-			likeBO.addLike(postId, userId);
-		} else {
-			result.put("errorMessage", "서버에러");
-		}
+		result.put("code", 100);
+		result.put("result", "success");
+		
+		// 컨트롤러에서 로직이 들어가면 좋지 않으므로 BO에서 처리한다.
+		//boolean isLike = likeBO.existLike(postId, userId);
+		
+		//if (isLike == true) {
+			//result.put("code", 100);
+			//result.put("result", "success");
+			//likeBO.deleteLikeByPostIdUserId(postId, userId);
+		//} else if (isLike == false) {
+			//result.put("code", 100);
+			//result.put("result", "success");
+			//likeBO.addLike(postId, userId);
+		//} else {
+			//result.put("errorMessage", "서버에러");
+		//}
 		
 		return result;
 	}

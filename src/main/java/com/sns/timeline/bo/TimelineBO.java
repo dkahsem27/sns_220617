@@ -53,10 +53,17 @@ public class TimelineBO {
 			card.setCommentList(commentList);
 			
 			// 내가 좋아요를 눌렀는지
-			card.setFilledLike(likeBO.existLike(post.getId(), userId));
+			//card.setFilledLike(likeBO.existLike(post.getId(), userId));
+			if (userId == null) {
+				card.setFilledLike(false);
+			} else {
+				int count = likeBO.getLikeCountByPostIdOrUserId(post.getId(), userId);
+				card.setFilledLike(count > 0 ? true : false);
+			}
 			
 			// 좋아요 개수
-			card.setLikeCount(likeBO.getLikeCountByPostId(post.getId()));
+			//card.setLikeCount(likeBO.getLikeCountByPostId(post.getId()));
+			card.setLikeCount(likeBO.getLikeCountByPostIdOrUserId(post.getId(), null));
 			
 			// 카드 리스트에 채우기!!!!!!!!!!!
 			cardViewList.add(card);
