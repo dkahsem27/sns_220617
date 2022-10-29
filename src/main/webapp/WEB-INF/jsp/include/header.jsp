@@ -9,7 +9,7 @@
 			<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="프로필이미지">
 		    <div class="greeting ml-2"><span class="user-name">${userName}</span>님 안녕하세요!</div>
 	    </div>
-	    <a href="/user/mypage" class="btn-mypage ml-5 text-secondary">마이페이지</a>
+	    <a href="/user/my_page_view" class="btn-mypage ml-5 text-secondary">마이페이지</a>
 	    <a href="/user/sign_out" class="btn-sign-out ml-3 text-secondary">로그아웃</a>
 	</c:if>
   </div>

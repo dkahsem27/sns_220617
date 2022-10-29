@@ -39,4 +39,16 @@ public class UserController {
 		session.removeAttribute("userId");
 		return "redirect:/user/sign_in_view";
 	}
+	
+	@RequestMapping("/my_page_view")
+	public String mypage(Model model) {
+		model.addAttribute("viewName", "user/myPage");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/profile_update_view")
+	public String updateView(Model model) {
+		model.addAttribute("viewName", "user/profileUpdate");
+		return "template/layout";
+	}
 }
