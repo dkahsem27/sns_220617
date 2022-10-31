@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="timeline-wrap">
-	<%-- 글쓰기 --%>
+	<%-- 글쓰기: 로그인 된 사람만 보이게 --%>
 	<section class="add-post-area col-6">
 		<div class="add-post-inner py-2">
 			<textarea id="content" class="px-2"></textarea>
@@ -25,7 +25,12 @@
 			      <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="프로필이미지">
 			      <div class="userid ml-2">${card.user.loginId}</div>
 			    </div>
-			    <button type="button" class="btn-more"><span class="material-icons c-gray">more_horiz</span></button>
+			    <%-- 더보기(모달)버튼: 내가 쓴 글일 때만 더보기 노출 --%>
+			    <c:if test="${card.post.userId == card.user.id}">
+				    <button type="button" class="btn-more" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}">
+				    	<span class="material-icons c-gray">more_horiz</span>
+				    </button>
+			    </c:if>
 		  	</div>
 		  	<%-- 포스트 이미지 --%>
 		  	<div class="image-box">
@@ -72,6 +77,19 @@
 		  	</div>
 		</section>
 	</c:forEach>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal">
+	<div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content">
+			<%-- 모달 창 안에 내용 넣기 --%>
+			<div class="btn-box p-3">
+				<button type="button" id="delPostBtn" class="btn btn-dark btn-block">삭제하기</button>
+				<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -231,6 +249,43 @@ $(document).ready(function() {
 			}
 			, error: function(e) {
 				alert("실패했습니다");
+			}
+		});
+	});
+	
+	// 더보기 버튼 클릭 - 글 삭제 위해서 => 삭제될 글 번호를 모달에 넣어준다.
+	$('.btn-more').on('click', function(e) {
+		e.preventDefault(); // a태그로 이벤트 잡을 경우 화면 상단으로 올라가는 걸 방지 (button을 쓰는 경우 상관x)
+		
+		let postId = $(this).data('post-id'); // getting
+		
+		$('#modal').data('post-id', postId); // setting      data-post-id="1"
+	});
+	
+	// 모달창 안에 있는 글삭제 버튼 클릭
+	$('#modal #delPostBtn').on('click', function(e) {
+		e.preventDefault(); // a태그로 이벤트 잡을 경우 화면 상단으로 올라가는 걸 방지 (button을 쓰는 경우 상관x)
+		
+		let postId = $('#modal').data('post-id');
+		
+		// ajax 호출 => 글 삭제
+		$.ajax({
+			// request
+			type:"delete"
+			, url: "/post/delete"
+			, data: {"postId":postId}
+		
+			// response
+			, success: function(data) {
+				if (data.code == 100) {
+					alert("삭제되었습니다.");
+					location.reload();
+				} else { // 실패
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("삭제 실패");
 			}
 		});
 	});

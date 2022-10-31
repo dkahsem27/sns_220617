@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sns.comment.bo.CommentBO;
 import com.sns.timeline.bo.TimelineBO;
 
 @RequestMapping("/timeline")
@@ -21,9 +20,6 @@ public class TimelineController {
 	
 	@Autowired
 	private TimelineBO timelineBO;
-	
-	@Autowired
-	private CommentBO commentBO;
 	
 	@RequestMapping("/timeline_view")
 	public String timelineView(HttpSession session, Model model) {
