@@ -72,11 +72,7 @@ textarea {border: none; outline: none; font-size: 14px;}
 .post-list-area .comment-input-box .btn-upload {min-width: 10%;}
 
 .mypage-wrap {margin: 0 auto;}
-.mypage-wrap .user-info .image-box {width: 100%; text-align: center;}
-.mypage-wrap .user-info .image-box img {width: 100%; height: 100%; max-width: 280px; max-height: 280px; object-fit: cover; border-radius: 50%;}
+.mypage-wrap .image-box {width: 100%; text-align: center;}
+.mypage-wrap .image-box img {width: 100%; height: 100%; max-width: 280px; max-height: 280px; object-fit: cover; border-radius: 50%;}
 .mypage-wrap .user-info .info-box .title {width: 120px; font-size: 14px; font-weight: 600;}
-
-.profile-update-wrap {margin: 0 auto;}
-.profile-update-wrap .image-box {width: 100%; text-align: center;}
-.profile-update-wrap .image-box img {width: 100%; height: 100%; max-width: 280px; max-height: 280px; object-fit: cover; border-radius: 50%;}
 
