@@ -64,10 +64,10 @@ public class PostBO {
 		}
 		
 		// 좋아요들 삭제
-		likeBO.deleteLikeByPostIdUserId(postId, userId);
+		likeBO.deleteLikeByPostId(postId);
 		
 		// 댓글들 삭제
-		commentBO.deleteCommentByPostIdUserId(postId, userId);
+		commentBO.deleteCommentByPostId(postId);
 		
 		// 글 삭제
 		return postDAO.deletePostByPostIdUserId(postId, userId);

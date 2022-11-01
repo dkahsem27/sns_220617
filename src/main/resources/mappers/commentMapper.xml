@@ -35,11 +35,10 @@
 			`postId` = #{postId}
 	</select>
 	
-	<delete id="deleteCommentByPostIdUserId" parameterType="map">
+	<delete id="deleteCommentByPostId" parameterType="int">
 		DELETE FROM 
 			`comment`
 		WHERE
 			`postId` = #{postId}
-			AND `userId` = #{userId}
 	</delete>
 </mapper>
