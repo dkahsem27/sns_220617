@@ -61,8 +61,8 @@ public class UserController {
 			return "redirect:/user/sign_in_view";
 		}
 		
-		User<User> user = userBO.;
-		model.addAttribute("user", user);
+		//User<User> user = userBO.getUserById(0);
+		//model.addAttribute("user", user);
 		
 		model.addAttribute("viewName", "user/myPage");
 		return "template/layout";
