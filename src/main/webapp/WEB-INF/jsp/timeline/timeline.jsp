@@ -3,19 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="timeline-wrap">
 	<%-- 글쓰기: 로그인 된 사람만 보이게 --%>
-	<section class="add-post-area col-6">
-		<div class="add-post-inner py-2">
-			<textarea id="content" class="px-2"></textarea>
-			<div class="util-box pt-2 px-2 d-flex justify-content-between align-items-center">
-				<div class="file-upload d-flex align-items-center">
-					<input type="file" id="file" class="d-none" accept=".gif, .jpg, .jpeg, .png">
-				    <button type="button" id="fileUploadBtn" class="btn-img-upload"><span class="material-icons-outlined c-gray">add_photo_alternate</span></button>
-				    <div id="fileName" class="file-name ml-2"></div>
-				</div>
-			    <button type="button" id="postCreateBtn" class="btn-upload">게시</button>
+	<c:if test="${not empty userId}">
+		<section class="add-post-area col-6">
+			<div class="add-post-inner py-2">
+				<textarea id="content" class="px-2"></textarea>
+				<div class="util-box pt-2 px-2 d-flex justify-content-between align-items-center">
+					<div class="file-upload d-flex align-items-center">
+						<input type="file" id="file" class="d-none" accept=".gif, .jpg, .jpeg, .png">
+					    <button type="button" id="fileUploadBtn" class="btn-img-upload"><span class="material-icons-outlined c-gray">add_photo_alternate</span></button>
+					    <div id="fileName" class="file-name ml-2"></div>
+					</div>
+				    <button type="button" id="postCreateBtn" class="btn-upload">게시</button>
+			  	</div>
 		  	</div>
-	  	</div>
-	</section>
+		</section>
+	</c:if>
 	<%-- 목록 --%>
 	<c:forEach items="${cardList}" var="card">
 		<section class="post-list-area col-6 mt-4">
@@ -26,7 +28,7 @@
 			      <div class="userid ml-2">${card.user.loginId}</div>
 			    </div>
 			    <%-- 더보기(모달)버튼: 내가 쓴 글일 때만 더보기 노출 --%>
-			    <c:if test="${card.post.userId == card.user.id}">
+			    <c:if test="${userId eq card.user.id}">
 				    <button type="button" class="btn-more" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}">
 				    	<span class="material-icons c-gray">more_horiz</span>
 				    </button>

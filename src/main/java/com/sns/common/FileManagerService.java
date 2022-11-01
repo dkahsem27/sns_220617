@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManagerService {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
-	public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\sns\\workspace\\images/";
-	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\dkahs\\OneDrive\\_MEGA\\work_ee\\spring_project\\sns\\workspace\\images/";
+	//public static final String FILE_UPLOAD_PATH = "D:\\kwonyeji\\spring_project\\sns\\workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "C:\\Users\\dkahs\\OneDrive\\_MEGA\\work_ee\\spring_project\\sns\\workspace\\images/";
 	
 	public String saveFile(String userLoginId, MultipartFile file) {
 		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/";

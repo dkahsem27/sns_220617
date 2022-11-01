@@ -66,10 +66,14 @@ public class PostRestController {
 			HttpSession session) {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
-		
-		int row = postBO.deletePost(postId, userId);
-		
 		Map<String, Object> result = new HashMap<>();
+		// 로그인이 풀렸을 때
+		if (userId == null) {
+			result.put("code", 300);
+			result.put("errorMessage", "로그인 상태가 아닙니다. 다시 로그인 해 주세요.");
+		}
+		
+		int row = postBO.deletePostByPostIdUserId(postId, userId);
 		if (row > 0) {
 			result.put("code", 100);
 			result.put("result", "success");

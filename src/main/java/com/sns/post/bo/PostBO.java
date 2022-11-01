@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sns.comment.bo.CommentBO;
 import com.sns.common.FileManagerService;
 import com.sns.like.bo.LikeBO;
 import com.sns.post.dao.PostDAO;
@@ -22,6 +23,9 @@ public class PostBO {
 	
 	@Autowired
 	private LikeBO likeBO;
+	
+	@Autowired
+	private CommentBO commentBO;
 	
 	@Autowired
 	private FileManagerService fileManagerService;
@@ -46,11 +50,11 @@ public class PostBO {
 		return postDAO.selectPostByPostId(postId);
 	}
 	
-	public int deletePost(int postId, int userId) {
+	public int deletePostByPostIdUserId(int postId, int userId) {
 		// 기존글 가져오기
 		Post post = getPostByPostId(postId);
 		if (post == null) {
-			log.warn("[delete post] 삭제할 게시글이 없습니다. postId:{}", postId);
+			log.warn("[delete post] 삭제할 게시글이 없습니다. postId:{}, userId:{}", postId, userId);
 			return 0;
 		}
 		
@@ -59,13 +63,13 @@ public class PostBO {
 			fileManagerService.deleteFile(post.getImagePath());
 		}
 		
-		// 글 삭제
-		
 		// 좋아요들 삭제
 		likeBO.deleteLikeByPostIdUserId(postId, userId);
 		
 		// 댓글들 삭제
+		commentBO.deleteCommentByPostIdUserId(postId, userId);
 		
-		return postDAO.deletePost(postId);
+		// 글 삭제
+		return postDAO.deletePostByPostIdUserId(postId, userId);
 	}
 }
