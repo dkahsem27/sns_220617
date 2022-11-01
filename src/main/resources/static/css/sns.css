@@ -60,13 +60,15 @@ textarea {border: none; outline: none; font-size: 14px;}
 .post-list-area .like-box .like-count {line-height: 24px; font-size: 14px; font-weight: 500; color: #666;}
 
 .post-list-area .content-box {font-size: 14px;}
-.post-list-area .content-box .post-content .user-name {width: 15%;}
-.post-list-area .content-box .content {width: 85%;}
+.post-list-area .content-box .post-content .user-name {width: 80px}
+.post-list-area .content-box .content {width: 100%;}
 
 .post-list-area .comment-box {font-size: 14px; border-top: 1px solid #eee;}
 .post-list-area .comment-box-title {font-size: 13px; color: #888;}
-.post-list-area .comment-box .comment-content .user-name {width: 15%; font-weight: 500;}
-.post-list-area .comment-box .content {width: 85%;}
+.post-list-area .comment-box .comment-content {position: relative;}
+.post-list-area .comment-box .comment-content .btn-clear {position: absolute; top: 0; right: 0;}
+.post-list-area .comment-box .comment-content .user-name {width: 80px; font-weight: 500;}
+.post-list-area .comment-box .content {width: 100%; padding-right: 26px;}
 
 .post-list-area .comment-input-box {width: 100%; border-top: 1px solid #ddd;}
 .post-list-area .comment-input-box .btn-upload {min-width: 10%;}

@@ -62,10 +62,15 @@
 			  	<div class="comment-box mt-4 p-2">
 			  		<div class="comment-box-title mb-2">댓글</div>
 			  		<c:forEach items="${card.commentList}" var="commentView">
-				  		<div class="comment-content d-flex align-items-center mt-2">
+				  		<div class="comment-content d-flex align-items-start mt-2">
 				  			<div class="user-name">${commentView.user.loginId}</div>
 				  			<div class="content">${commentView.comment.content}</div>
-				  			<button type="button" class="btn-clear ml-2"><span class="material-icons md-18 c-gray">clear</span></button>
+				  			<%-- 댓글 삭제버튼: 내 댓글일 때만 노출 --%>
+				  			<c:if test="${userId eq commentView.comment.userId}">
+					  			<button type="button" class="btn-clear" data-comment-id="${commentView.comment.id}">
+					  				<span class="material-icons md-18 c-gray">clear</span>
+					  			</button>
+				  			</c:if>
 				  		</div>
 			  		</c:forEach>
 			  	</div>
@@ -212,7 +217,7 @@ $(document).ready(function() {
 			// response
 			, success: function(data) {
 				if (data.code == 100) { // 성공
-					alert("댓글이 저장되었습니다");
+					//alert("댓글이 저장되었습니다");
 					location.reload();
 				} else if (data.code == 300) { // 비로그인시
 					alert(data.errorMessage);
@@ -271,23 +276,52 @@ $(document).ready(function() {
 		let postId = $('#modal').data('post-id');
 		
 		// ajax 호출 => 글 삭제
+		if (confirm("삭제 하시겠습니까?")) {
+			$.ajax({
+				// request
+				type:"delete"
+				, url: "/post/delete"
+				, data: {"postId":postId}
+			
+				// response
+				, success: function(data) {
+					if (data.code == 100) {
+						alert("삭제되었습니다.");
+						location.reload();
+					} else { // 실패
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert("삭제 실패");
+				}
+			});
+		}
+	});
+	
+	// 댓글 삭제 버튼 클릭
+	$('.btn-clear').on('click', function() {
+		let commentId = $(this).data('comment-id');
+		//alert(commentId);
+		
+		// ajax
 		$.ajax({
 			// request
-			type:"delete"
-			, url: "/post/delete"
-			, data: {"postId":postId}
+			type: "delete"
+			, url: "/comment/delete"
+			, data: {"commentId":commentId}
 		
 			// response
 			, success: function(data) {
 				if (data.code == 100) {
-					alert("삭제되었습니다.");
+					alert("댓글이 삭제되었습니다.");
 					location.reload();
-				} else { // 실패
+				} else {
 					alert(data.errorMessage);
 				}
 			}
 			, error: function(e) {
-				alert("삭제 실패");
+				alert("댓글 삭제 실패");
 			}
 		});
 	});

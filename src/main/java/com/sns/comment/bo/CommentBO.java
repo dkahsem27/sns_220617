@@ -59,4 +59,8 @@ public class CommentBO {
 	public void deleteCommentByPostId(int postId) {
 		commentDAO.deleteCommentByPostId(postId);
 	}
+	
+	public int deleteCommentByCommentId(int commentId) {
+		return commentDAO.deleteCommentByCommentId(commentId);
+	}
 }
