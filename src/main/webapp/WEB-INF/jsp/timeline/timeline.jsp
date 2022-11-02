@@ -21,7 +21,7 @@
 	<%-- 목록 --%>
 	<c:forEach items="${cardList}" var="card">
 		<section class="post-list-area col-6 mt-4">
-			<%-- 글쓴이, 더보기(삭제) --%>
+			<%-- 글쓴이, 더보기(삭제) : 프로필이미지 없을 때 디폴트이미지로 설정 --%>
 			<div class="util-box d-flex justify-content-between align-items-center px-2 py-2">
 			    <div class="user-info d-flex align-items-center">
 			      <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="프로필이미지">
@@ -35,11 +35,11 @@
 			    </c:if>
 		  	</div>
 		  	<%-- 포스트 이미지 --%>
-		  	<div class="image-box">
+		  	<div class="image-box mb-3">
 			    <img src="${card.post.imagePath}" alt="포스트이미지">
 			</div>
 			<%-- 좋아요 --%>
-			<div class="like-box d-flex mt-3 px-2">
+			<div class="like-box d-flex mb-5 px-2">
 				<button type="button" class="btn-like" data-post-id="${card.post.id}">
 					<c:if test="${card.filledLike eq false}">
 				    	<span class="like-empty material-icons">favorite_border</span>
@@ -51,7 +51,7 @@
 			    <div class="like-count ml-2">좋아요 ${card.likeCount}개</div>
 		  	</div>
 		  	<%-- 포스트 내용 --%>
-		  	<div class="content-box mt-5 px-2">
+		  	<div class="content-box mb-3 px-2">
 		  		<div class="post-content d-flex">
 		  			<div class="user-name font-weight-bold">${card.user.loginId}</div>
 		  			<div class="content">${card.post.content}</div>
@@ -59,7 +59,7 @@
 		  	</div>
 		  	<%-- 댓글 --%>
 		  	<c:if test="${not empty card.commentList}">
-			  	<div class="comment-box mt-4 p-2">
+			  	<div class="comment-box mb-3 p-2">
 			  		<div class="comment-box-title mb-2">댓글</div>
 			  		<c:forEach items="${card.commentList}" var="commentView">
 				  		<div class="comment-content d-flex align-items-start mt-2">
@@ -75,13 +75,15 @@
 			  		</c:forEach>
 			  	</div>
 		  	</c:if>
-		  	<%-- 댓글쓰기 --%>
-		  	<div class="comment-input-box mt-4">
-		  		<div class="comment-input py-2 pl-2 d-flex justify-content-between align-items-center">
-		  			<input type="text" class="w-100" placeholder="댓글 달기">
-		  			<button type="button" class="btn-comment btn-upload" data-post-id="${card.post.id}">게시</button>
-		  		</div>
-		  	</div>
+		  	<%-- 댓글쓰기 : 로그인 된 사람만 보이게 --%>
+		  	<c:if test="${not empty userId}">
+			  	<div class="comment-input-box">
+			  		<div class="comment-input py-2 pl-2 d-flex justify-content-between align-items-center">
+			  			<input type="text" class="w-100" placeholder="댓글 달기">
+			  			<button type="button" class="btn-comment btn-upload" data-post-id="${card.post.id}">게시</button>
+			  		</div>
+			  	</div>
+		  	</c:if>
 		</section>
 	</c:forEach>
 </div>

@@ -28,7 +28,7 @@ public class LikeRestController {
 		// 로그인 여부
 		if (userId == null) {
 			result.put("code", 300);
-			result.put("errorMessage", "로그인 상태가 아닙니다. 다시 로그인 해 주세요.");
+			result.put("errorMessage", "로그인 상태가 아닙니다. 로그인 해주세요.");
 			return result;
 		}
 		

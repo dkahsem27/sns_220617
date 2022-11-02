@@ -18,21 +18,27 @@ textarea {border: none; outline: none; font-size: 14px;}
 .c-red {color: firebrick;}
 .c-gray {color: gray;}
 
+.c-blue {color: #515BD4;} /* 파랑 */
+.c-purple {color: #8134AF;} /* 보라 */
+.c-pink {color: #DD2A7B;} /* 분홍 */
+.c-yellow {color: #FEDA77;} /* 노랑 */
+.c-orange {color: #F58529;} /* 주황 */
+
 /* common */
-.btn-upload {color: lightseagreen; font-size: 14px;}
+.btn-upload {color: #515BD4; font-size: 14px;}
 .btn-img-upload {max-height: 24px;}
 .btn-clear {max-height: 18px;}
 
 /* header */
 #header {z-index: 100; width: 100%; position: fixed; top: 0; left: 0; height: 80px; padding: 0 20px; background: #fff; border-bottom: 1px solid #eee;}
 #header h1 {margin-bottom: 0; font-size: 35px;}
+#header .logo img {max-width: 165px;}
+
 #header .util-box .user-info > img {min-width: 25px; max-width: 25px; min-height: 25px; border-radius: 50%; object-fit: cover;}
-#header .util-box .greeting {color: #666;}
+#header .util-box .greeting {cursor: default; color: #666;}
 #header .util-box .greeting .user-name {font-weight: 500; color: #000;}
-#header .util-box .btn-mypage {font-size: 14px;}
-#header .util-box .btn-mypage:hover {text-decoration: underline !important;}
-#header .util-box .btn-sign-out {font-size: 14px;}
-#header .util-box .btn-sign-out:hover {text-decoration: underline !important;}
+#header .util-box .btn-text {font-size: 14px;}
+#header .util-box .btn-text:hover {color: #F58529; transition: color 150ms;}
 
 /* contents */
 #contents {max-width: 1100px; margin: 0 auto; padding: 140px 0 60px;}

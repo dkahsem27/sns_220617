@@ -25,10 +25,10 @@ public class TimelineController {
 	public String timelineView(HttpSession session, Model model) {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
-		if (userId == null) {
-			// 로그인이 풀려있으면 로그인 페이지로 리다이렉트
-			return "redirect:/user/sign_in_view";
-		}
+//		if (userId == null) {
+//			// 로그인이 풀려있으면 로그인 페이지로 리다이렉트
+//			return "redirect:/user/sign_in_view";
+//		}
 		
 		//List<CardView> postList = postBO.getPostList();
 		// model.addAttribute("postList", postList);
